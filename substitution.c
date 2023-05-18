@@ -7,6 +7,8 @@ void encript_text(string plaintext, string key, const int textLength);
 
 int main(int argc, string argv[])
 {
+	const string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+
 	// Get CLA from user and check if it has 2 arguments
 	if (argc != 2)
 	{
@@ -18,7 +20,7 @@ int main(int argc, string argv[])
 	const int length = strlen(argv[1]);
 
 	// Check the key argument to have 26 characters
-	if (length < 26)
+	if (length != 26)
 	{
 		printf("Key must contain 26 characters.\n");
 		return 1;
@@ -33,6 +35,8 @@ int main(int argc, string argv[])
 			return 1;
 		}
 	}
+
+	
 
 	// Debug key
 	// printf("key: %s\n", argv[1]);
