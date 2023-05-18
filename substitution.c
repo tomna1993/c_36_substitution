@@ -7,8 +7,6 @@ void encript_text(string plaintext, string key, const int textLength);
 
 int main(int argc, string argv[])
 {
-	const string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
-
 	// Get CLA from user and check if it has 2 arguments
 	if (argc != 2)
 	{
@@ -36,7 +34,28 @@ int main(int argc, string argv[])
 		}
 	}
 
-	
+	// Check the key to not contain the same letter twice
+	for (int i = 0; i < length; i++)	
+	{
+		// save the key[i] letter as lowercase
+		char toTest_keyLower = tolower(argv[1][i]);
+		// save the key[i] letter as uppercase
+		char toTest_keyUpper = toupper(argv[1][i]);
+
+		// Debug toTest_keyLower, toTest_keyUpper 
+		// printf("LowerKey: %c, UpperKey: %c\n", toTest_keyLower, toTest_keyUpper);
+
+		// Iterate through the key string and compare the saved letter
+		// with all other letters; This checks that each letter is included just once
+		for (int j = i+1; j < length; j++)
+		{
+			if (toTest_keyLower == argv[1][j] || toTest_keyUpper == argv[1][j])
+			{
+				printf("Key mustn't contain the same character more time!\n");
+				return 1;
+			}
+		}
+	}
 
 	// Debug key
 	// printf("key: %s\n", argv[1]);
