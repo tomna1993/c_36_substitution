@@ -14,8 +14,11 @@ int main(int argc, string argv[])
 		return 1;
 	}
 
+	// Save argv[1] as key
+	string key = argv[1];
+
 	// Get CLA string length and save it as a constant
-	const int length = strlen(argv[1]);
+	const int length = strlen(key);
 
 	// Check the key argument to have 26 characters
 	if (length != 26)
@@ -24,23 +27,20 @@ int main(int argc, string argv[])
 		return 1;
 	}
 	
-	// Check the key argument to have just alphabetic characters
-	for (int i = 0; i < length; i++)
+	// Check the key to not contain the same letter twice
+	for (int i = 0; i < length; i++)	
 	{
-		if (!isalpha(argv[1][i]))	
+		// Check the key argument to have just alphabetic characters
+		if (!isalpha(key[i]))	
 		{
 			printf("Key must contain just alphabetic characters.\n");
 			return 1;
 		}
-	}
 
-	// Check the key to not contain the same letter twice
-	for (int i = 0; i < length; i++)	
-	{
 		// save the key[i] letter as lowercase
-		char toTest_keyLower = tolower(argv[1][i]);
+		char toTest_keyLower = tolower(key[i]);
 		// save the key[i] letter as uppercase
-		char toTest_keyUpper = toupper(argv[1][i]);
+		char toTest_keyUpper = toupper(key[i]);
 
 		// Debug toTest_keyLower, toTest_keyUpper 
 		// printf("LowerKey: %c, UpperKey: %c\n", toTest_keyLower, toTest_keyUpper);
@@ -49,7 +49,7 @@ int main(int argc, string argv[])
 		// with all other letters; This checks that each letter is included just once
 		for (int j = i+1; j < length; j++)
 		{
-			if (toTest_keyLower == argv[1][j] || toTest_keyUpper == argv[1][j])
+			if (toTest_keyLower == key[j] || toTest_keyUpper == key[j])
 			{
 				printf("Key mustn't contain the same character more time!\n");
 				return 1;
@@ -58,14 +58,14 @@ int main(int argc, string argv[])
 	}
 
 	// Debug key
-	// printf("key: %s\n", argv[1]);
+	// printf("key: %s\n", key);
 
 	// Ask user for plaintext
 	string plaintext = get_string("plaintext: ");
 
 	// Convert the plaintext to ciphertext; be careful, the function will 
 	// change the plaintext strin array!
-	encript_text(plaintext, argv[1], length);
+	encript_text(plaintext, key, length);
 
 	// Print ciphertext
 	printf("ciphertext: %s\n", plaintext);
